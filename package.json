@@ -6,9 +6,25 @@
   "main": "server.js",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "dependencies": {
-    "express": "^4.16.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^6.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Susheel4115/React-Insta-Clone.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Susheel4115/React-Insta-Clone/issues"
+  },
+  "homepage": "https://github.com/Susheel4115/React-Insta-Clone#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
