@@ -27,6 +27,7 @@ router.route("/register").post((req, res) => {
           newUser.save().then((user) => {
             const token = generateAccessToken(user.id, user.username);
             res.json({
+              Status: "Success",
               token,
               user,
             });

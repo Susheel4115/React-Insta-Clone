@@ -6,38 +6,35 @@
 // 'use strict';
 
 const express = require("express");
-require("dotenv").config();
+const mongoose = require("mongoose");
 const cors = require("cors");
-const { default: mongoose } = require("mongoose");
-const Post = require("./models/post.model");
-// Constants
-const PORT = process.env.PORT;
-// const HOST = "0.0.0.0";
+require("dotenv").config();
 
-// App
 const app = express();
+const User = require("./models/user.model");
+const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req, res) => {
-  const dataUploaded = await Post.find({});
-
-  res.send(dataUploaded);
-});
-
-app.listen(PORT, () => {
-  console.log(`server is running on port - ${PORT}`);
-});
-
-const url = process.env.MONGO_URL;
-mongoose.connect(url, { useNewUrlParser: true });
+const uri = process.env.MONGO_URL;
+mongoose.connect(uri, { useNewUrlParser: true });
 
 const connection = mongoose.connection;
-
 connection.once("open", () => {
-  console.log("Db connected");
+  console.log("Databse connection established");
 });
 
-const userRouter = require("./routes/user");
+const usersRouter = require("./routes/users");
+const postsRouter = require("./routes/posts");
 
-app.use("/user", userRouter);
+app.use("/users", usersRouter);
+app.use("/posts", postsRouter);
+
+app.get("/", async (req, res) => {
+  const data = await User.find({});
+
+  res.send(data);
+});
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+});
